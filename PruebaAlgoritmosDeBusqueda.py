@@ -44,7 +44,25 @@ class AlgoritmosDeBusqueda:
         print()
         self.mostrarDatosDeEficiencia(contadorComparaciones, contadorRecorridos, tiempoTotal)
         return encontrado
-    
+
+    def busquedaBianria(self, datos, elemento):
+        primero=0;
+        ultimo=len(datos)
+
+        while(primero<=ultimo):
+            centro=int((primero+ultimo)/2)
+            valorCentro=datos[centro]
+            print("Comparando "+str(elemento)+" con "+str(datos[centro]))
+            
+            if(elemento==valorCentro):
+                return centro
+            elif(elemento<valorCentro):
+                ultimo=centro-1
+            else:
+                ultimo=centro+1
+                
+        return -1
+        
     
     
 
