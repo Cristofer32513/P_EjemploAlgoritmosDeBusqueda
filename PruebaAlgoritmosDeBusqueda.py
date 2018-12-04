@@ -63,8 +63,28 @@ class AlgoritmosDeBusqueda:
                 
         return -1
         
+class Hash_table:
+    def __init__(self):
+        self.table=[None]*127
     
+    def Hash_fun(self, value):
+        key=0
+        for i in range(0,len(value)):
+            key+=ord(value[i])
+        return key%127
     
+    def Insert(self, value):
+        hash=self.Hash_fun(value)
+        if(self.table[hash]is None):
+            self.table[hash]=value
+            
+    def Search(self, value):
+        hash=self.Hash_fun(value)
+        if(self.table[hash] is None):
+            return None
+        else:
+            print("Se encontro el elemento en")
+            return id(self.table[hash])
 
 algoritmos=AlgoritmosDeBusqueda()
 repetirMenuPrincipal=True
@@ -74,7 +94,7 @@ datos=[]
 while(repetirMenuPrincipal):
     print("1 = Algoritmo de busqueda Secuencial.")
     print("2 = (Sin funcion... Por Ahora)")
-    print("3 = (Sin funcion... Por Ahora)")
+    print("3 = Algoritmo de busqueda por Funciones Hash.")
     print("4 = Llenar vector a utilizar.")
     print("5 = Salir")
     print("-----------------------------------------")
@@ -110,7 +130,12 @@ while(repetirMenuPrincipal):
             print()
         if(opcion==3):
             if(len(datos)>0):
-                print()
+                h=Hash_table()
+                h.Insert("Alo")
+                h.Insert("Bou")
+                h.Insert("Col")
+                
+                print(h.Search("Bou"))
             else:
                 print("  *No se ha elegido un tamanio para el vector.")
             print()
