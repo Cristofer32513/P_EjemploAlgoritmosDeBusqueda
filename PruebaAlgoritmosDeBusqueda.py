@@ -1,5 +1,5 @@
 from time import time
-from builtins import str
+from builtins import str, sorted
 import random
 
 class AlgoritmosDeBusqueda:
@@ -19,7 +19,6 @@ class AlgoritmosDeBusqueda:
         print()
         print("    - Cantidad  de  recorridos  realizados:    "+str(contadorRecorridos))
         print("    - Cantidad de comparaciones realizadas:    "+str(contadorComparaciones))
-        #print("    - Cantidad  de intercambios realizados:    "+str(contadorIntercambios))
         print("    - Tiempo     total     de    ejecucion:    "+str(tiempoTotal)+" segundos")
         print("    - Tiempo     total     de    ejecucion:    "+str(tiempoTotal*1000)+" milisegundos")
     
@@ -40,6 +39,10 @@ class AlgoritmosDeBusqueda:
             else:
                 pos+=1
             if(encontrado==True):
+                tiempoTotal=time()-inicio
+                print()
+                print()
+                self.mostrarDatosDeEficiencia(contadorComparaciones, contadorRecorridos, tiempoTotal)
                 return pos
         tiempoTotal=time()-inicio
         print()
@@ -48,21 +51,34 @@ class AlgoritmosDeBusqueda:
         return -1
 
     def busquedaBianria(self, datos, elemento):
-        primero=0;
+        contadorComparaciones=0
+        contadorRecorridos=0
+        
+        primero=0
         ultimo=len(datos)
-
+        
+        contadorRecorridos+=1
+        inicio=time()
         while(primero<=ultimo):
+            contadorComparaciones+=1
             centro=int((primero+ultimo)/2)
             valorCentro=datos[centro]
             print("Comparando "+str(elemento)+" con "+str(datos[centro]))
             
             if(elemento==valorCentro):
+                tiempoTotal=time()-inicio
+                print()
+                print()
+                self.mostrarDatosDeEficiencia(contadorComparaciones, contadorRecorridos, tiempoTotal)
                 return centro
             elif(elemento<valorCentro):
                 ultimo=centro-1
             else:
                 ultimo=centro+1
-                
+        tiempoTotal=time()-inicio
+        print()
+        print()
+        self.mostrarDatosDeEficiencia(contadorComparaciones, contadorRecorridos, tiempoTotal)
         return -1
         
 class Hash_table:
@@ -95,7 +111,7 @@ datos=[]
 
 while(repetirMenuPrincipal):
     print("1 = Algoritmo de busqueda Secuencial.")
-    print("2 = (Sin funcion... Por Ahora)")
+    print("2 = Algoritmo de busqueda Binaria.")
     print("3 = Algoritmo de busqueda por Funciones Hash.")
     print("4 = Llenar vector a utilizar.")
     print("5 = Salir")
@@ -126,7 +142,20 @@ while(repetirMenuPrincipal):
             print()
         if(opcion==2):
             if(len(datos)>0):
-                print()
+                copiaDatos=sorted(datos.copy())
+                print("  ======================================================VECTOR ORIGINAL======================================================\n");
+                algoritmos.mostrarVector(copiaDatos);
+                print("\n\n");
+                print("  =================================================BUSQUEDA BINARIA================================================\n");
+                valor=algoritmos.busquedaBianria(copiaDatos, int(input("Ingrese el numero a buscar...")))
+                if(valor!=-1):
+                    print()
+                    print()
+                    print("   El numero se encuntra en la posicion "+str(valor+1));
+                else:
+                    print()
+                    print()
+                    print("   *El numero no existe")
             else:
                 print("  *No se ha elegido un tamanio para el vector.")
             print()
