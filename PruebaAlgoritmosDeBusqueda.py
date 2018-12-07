@@ -39,11 +39,13 @@ class AlgoritmosDeBusqueda:
                 encontrado=True
             else:
                 pos+=1
+            if(encontrado==True):
+                return pos
         tiempoTotal=time()-inicio
         print()
         print()
         self.mostrarDatosDeEficiencia(contadorComparaciones, contadorRecorridos, tiempoTotal)
-        return encontrado
+        return -1
 
     def busquedaBianria(self, datos, elemento):
         primero=0;
@@ -109,10 +111,11 @@ while(repetirMenuPrincipal):
                 algoritmos.mostrarVector(datos);
                 print("\n\n");
                 print("  =================================================BUSQUEDA SECUENCIAL================================================\n");
-                if(algoritmos.busquedaSecuencial(datos.copy(), int(input('Ingrese el numero a buscar...')))):
+                valor=algoritmos.busquedaSecuencial(datos.copy(), int(input('Ingrese el numero a buscar...')))
+                if(valor!=-1):
                     print()
                     print()
-                    print("   El numero si existe");
+                    print("   El numero se encuntra en la posicion "+str(valor+1));
                 else:
                     print()
                     print()
