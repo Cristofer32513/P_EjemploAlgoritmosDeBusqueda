@@ -2,6 +2,7 @@ from time import time
 from builtins import str, sorted
 import random
 
+
 class AlgoritmosDeBusqueda:
     
     def mostrarVector(self, datos):
@@ -85,6 +86,16 @@ class Hash_table:
     def __init__(self):
         self.table=[None]*127
     
+    def mostrarVector(self, datos):
+        cont=1
+        for i in range(0, len(datos)):
+            if(int(cont)==15):
+                print("  "+str(datos[i])+",    ")
+                cont=1
+            else:
+                print("  "+str(datos[i])+",    ", end="")
+                cont+=1
+    
     def Hash_fun(self, value):
         key=0
         for i in range(0,len(value)):
@@ -101,7 +112,6 @@ class Hash_table:
         if(self.table[hash] is None):
             return None
         else:
-            print("Se encontro el elemento en")
             return id(self.table[hash])
 
 algoritmos=AlgoritmosDeBusqueda()
@@ -163,11 +173,27 @@ while(repetirMenuPrincipal):
         if(opcion==3):
             if(len(datos)>0):
                 h=Hash_table()
-                h.Insert("Alo")
+                ''''h.Insert("Alo")
                 h.Insert("Bou")
                 h.Insert("Col")
+                h.Insert("arroz")
+                h.Insert("animal")
+                '''
                 
-                print(h.Search("Bou"))
+                
+                for i in range(0,len(datos)):
+                    h.Insert(str(datos[i]))
+                        
+                print("  ======================================================DATOS======================================================\n");
+                h.mostrarVector(datos)
+                print("\n\n");
+                respuesta=h.Search(input("Ingrese el dato a buscar..."))
+                print("\n");
+                
+                if(respuesta!=None):
+                    print("  Se encontro el elemento en la direccion de memoria: "+str(respuesta))
+                else:
+                    print("  *No se encontro el elemento buscado")
             else:
                 print("  *No se ha elegido un tamanio para el vector.")
             print()
