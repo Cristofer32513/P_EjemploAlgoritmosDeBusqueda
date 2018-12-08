@@ -50,13 +50,14 @@ class AlgoritmosDeBusqueda:
         print()
         self.mostrarDatosDeEficiencia(contadorComparaciones, contadorRecorridos, tiempoTotal)
         return -1
-
+    
+    '''=======METODO DE BUSQUEDA BINARIA======='''
     def busquedaBianria(self, datos, elemento):
         contadorComparaciones=0
         contadorRecorridos=0
         
         primero=0
-        ultimo=len(datos)
+        ultimo=len(datos)-1
         
         contadorRecorridos+=1
         inicio=time()
@@ -75,13 +76,14 @@ class AlgoritmosDeBusqueda:
             elif(elemento<valorCentro):
                 ultimo=centro-1
             else:
-                ultimo=centro+1
+                primero=centro+1
         tiempoTotal=time()-inicio
         print()
         print()
         self.mostrarDatosDeEficiencia(contadorComparaciones, contadorRecorridos, tiempoTotal)
         return -1
-        
+       
+'''=======METODO DE BUSQUEDA POR FUNCIONES HASH=======''' 
 class Hash_table:
     def __init__(self):
         self.table=[None]*127
@@ -96,6 +98,14 @@ class Hash_table:
                 print("  "+str(datos[i])+",    ", end="")
                 cont+=1
     
+    def mostrarDatosDeEficiencia(self, contadorComparaciones, contadorRecorridos, tiempoTotal):
+        print("       DATOS DE EFICIENCIA DEL ALGORITMO")
+        print()
+        print("    - Cantidad  de  recorridos  realizados:    "+str(contadorRecorridos))
+        print("    - Cantidad de comparaciones realizadas:    "+str(contadorComparaciones))
+        print("    - Tiempo     total     de    ejecucion:    "+str(tiempoTotal)+" segundos")
+        print("    - Tiempo     total     de    ejecucion:    "+str(tiempoTotal*1000)+" milisegundos")
+    
     def Hash_fun(self, value):
         key=0
         for i in range(0,len(value)):
@@ -108,10 +118,23 @@ class Hash_table:
             self.table[hash]=value
             
     def Search(self, value):
+        contadorComparaciones=0
+        contadorRecorridos=0
+        inicio=time()
         hash=self.Hash_fun(value)
+        contadorComparaciones+=1
+        contadorRecorridos+=1
         if(self.table[hash] is None):
+            tiempoTotal=time()-inicio
+            print()
+            print()
+            self.mostrarDatosDeEficiencia(contadorComparaciones, contadorRecorridos, tiempoTotal)
             return None
         else:
+            tiempoTotal=time()-inicio
+            print()
+            print()
+            self.mostrarDatosDeEficiencia(contadorComparaciones, contadorRecorridos, tiempoTotal)
             return id(self.table[hash])
 
 algoritmos=AlgoritmosDeBusqueda()
@@ -173,14 +196,7 @@ while(repetirMenuPrincipal):
         if(opcion==3):
             if(len(datos)>0):
                 h=Hash_table()
-                ''''h.Insert("Alo")
-                h.Insert("Bou")
-                h.Insert("Col")
-                h.Insert("arroz")
-                h.Insert("animal")
-                '''
-                
-                
+                            
                 for i in range(0,len(datos)):
                     h.Insert(str(datos[i]))
                         
@@ -202,7 +218,7 @@ while(repetirMenuPrincipal):
             datos=[]
             print("  Creando vector...")
             for i in range(0,100):
-                datos.insert(i, random.randint(1,100))
+                datos.insert(i, random.randint(0,100))
             print()
             print("  El vector ha sido creado y llenado.")
             print()
